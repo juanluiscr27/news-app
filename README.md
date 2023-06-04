@@ -1,7 +1,7 @@
-# news-app
+# News App
 A News Mobile App built with Flutter and implementing Clean Architecture.
 
-Taken from [Flutter Guys](https://www.youtube.com/watch?v=zon3WgmcqQw&list=PLjyxas0TsCpnjpzCv3rnsX3LjS9G2K05f&pp=iAQB) Youtube channel
+[1]: Taken from [Flutter Guys](https://www.youtube.com/watch?v=zon3WgmcqQw&list=PLjyxas0TsCpnjpzCv3rnsX3LjS9G2K05f&pp=iAQB) Youtube channel
 
 ## Clean Architecture
 The Clean Architecture is software design pattern which promotes the separation of concerns 
@@ -13,7 +13,7 @@ Clean Architecture aims at creating loosely coupled application components  in s
 it encapsulates the business logic but keeps it separate from the delivery mechanism. The main 
 rule of clean architecture is that code dependencies can only move from the outer levels inward.
 
-![Clean Architecture](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg "Clean Architecture Diagram")
+![Clean Architecture](https://blog.cleancoder.com/uncle-bob/images/2012-08-13-the-clean-architecture/CleanArchitecture.jpg "Clean Architecture diagram")
 *Clean Architecture by Robin C. Martin*
 
 ## Project Structure
@@ -24,13 +24,13 @@ Manage business logic, entity objects and use cases:
 * Repository
 * Services
 
-## Data 
+### Data 
 Handle infrastructure, data persistence and interface implementation:
 * Models
 * Repository
 * Data Sources
 
-## Presentation
+### Presentation
 Define the graphical user interface, views, pages, screens and widgets, as well as state providers 
 or controllers:
 * Provider
@@ -40,8 +40,9 @@ or controllers:
 
 ## Flutter Clean Architecture
 Reso Coder's Flutter Clean Architecture Proposal. It shows the dependency flow (data and call flow).
-Every "feature" of the app will be divided into 3 layers; presentation, domain, and data.
-![Clean Architecture](https://i0.wp.com/resocoder.com/wp-content/uploads/2019/08/Clean-Architecture-Flutter-Diagram.png?w=556&ssl=1 "Flutter Clean Architecture Diagram")
+Every "feature" of the app will be divided into 3 layers; Presentation, Domain, and Data.
+
+![Clean Architecture](https://i0.wp.com/resocoder.com/wp-content/uploads/2019/08/Clean-Architecture-Flutter-Diagram.png?w=556&ssl=1 "Flutter Clean Architecture diagram")
 *Flutter Clean Architecture by Matt Rešetár*
 
 ### Presentation
@@ -67,3 +68,39 @@ and data sources. Data sources can be Remote, usually for getting data from API;
 Additionally, Data sources don't return Entities but rather Models. Model classes which extend 
 Entities and add some specific functionality or additional fields.
 
+## CleanScope Architecture
+
+![CleanScope, by NoScopeDevs](https://cdn.hashnode.com/res/hashnode/image/upload/v1644200609927/LlNClxAsh.png?auto=compress,format&format=webp "CleanScope Architecture diagram")
+*CleanScope by NoScopeDevs*
+
+By implementing Clean architecture all the layers in our application are independent on from the other, 
+but the only layer that has complete autonomy is the domain. This is because the domain defines both 
+the types of data that we are going to use all around our app (entities) and the actions that are 
+going to be carried out in our project (repositories and use cases).
+
+The most common quality attributes use evaluate the performance of a software system are
+Scalability, Maintainability, Testability.
+
+Scalability, which in short terms is defined as the ability of a system to grow in workload without 
+dying while trying. Also, when a project grows, it must be reliable, meaning that to ensure reliability, 
+you have to maintain code with its tests passed to ensure it works. Finally, is called decoupling, 
+which is closely related to code reuse and independence of each piece of software.
+
+The Clean is an architecture suggested by Robert C. Martin claims to meet all of the characteristics
+mentioned previously when is followed with **The Dependency Rule**
+
+> Dependencies go from the outside in. That said, dependencies don't know anything about the components 
+> that depend on them.
+
+In the Clean Architecture diagram, as the circle that contains everything has the UI the rule says the 
+UI depends on the Controllers but a Controller doesn't know what's in the UI. Controller depends on 
+the Use Cases but a Use Case doesn't know what's in the Controller. Use Case depends on
+the Entities but a Entity doesn't know what's in the Use Case. So with the other circles from the 
+other side and those that contain them; Data sources, Gateways, Entities. What it is, the small 
+circle is used in the large circle and NOT vice versa.
+
+Domain: Define the entities, extracts the contracts in the system (interfaces, or abstract classes).
+
+Data: implements the contracts and obtains the data that the system uses.
+
+Presentation: Define the Graphical User Interface and Manage the application state.
