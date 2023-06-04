@@ -104,3 +104,42 @@ Domain: Define the entities, extracts the contracts in the system (interfaces, o
 Data: implements the contracts and obtains the data that the system uses.
 
 Presentation: Define the Graphical User Interface and Manage the application state.
+
+## Bloc Architecture
+
+![Bloc Architecture](https://bloclibrary.dev/assets/bloc_architecture_full.png "Bloc Architecture diagram")
+*Bloc Architecture, Bloc library*
+
+The bloc library architecture allows us to separate our application into three layers:
+
+* Presentation
+* Business Logic
+* Data:
+    * Repository
+    * Data Provider
+
+### Data Layer
+This layer is the lowest level of the application. Its responsibility is to retrieve/manipulate data
+from one or more sources, so it interacts with databases, network requests, and other asynchronous data sources.
+
+The data layer can be split into two parts:
+* Repository
+* Data Provider
+
+The **data provider** will usually expose simple APIs to perform CRUD operations. We might have a
+createData, readData, updateData, and deleteData method as part of our data layer. The data provider's
+responsibility is to provide raw data.
+
+The **repository** layer is a wrapper around one or more data providers with which the Bloc Layer
+communicates. It interact with multiple data providers and perform transformations on the data before
+handing the result to the business logic Layer.
+
+### Business Logic Layer
+The business logic layer's responsibility is to respond to input from the presentation layer with new 
+states. This layer can depend on one or more repositories to retrieve data needed to build up the 
+application state. Think of the business logic layer as the bridge between the user interface 
+(presentation layer) and the data layer.
+
+### Presentation Layer
+The presentation layer's responsibility is render itself based on one or more bloc states. In addition, 
+it should handle user input and application lifecycle events.
