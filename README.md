@@ -105,6 +105,42 @@ Data: implements the contracts and obtains the data that the system uses.
 
 Presentation: Define the Graphical User Interface and Manage the application state.
 
+## Riverpod Architecture
+This architecture is composed of four layers (data, domain, application, presentation).
+The separation of concerns is the #1 reason why we need a good app architecture. This architecture 
+defines four separate layers with clear boundaries
+
+![Riverpod Architecture](https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/images/flutter-app-architecture.webp "Riverpod Architecture diagram")
+*Flutter App Architecture using data, domain, application, and presentation layers. Arrows show the dependencies between layers, by Andrea Bizzotto*
+
+Each of these layers has its own responsibility and there's a clear contract for how communication 
+happens across boundaries. In the diagram above, the arrows indicate the dependencies between layers.
+
+### Data Layer
+The data layer sits at the bottom and contains the repositories that are used to talk to external data sources.
+
+Repositories are part of the data layer. And their job is to:
+* Isolate domain models (or entities) from the implementation details of the data sources in the data layer.
+* Convert data transfer objects to validated entities that are understood by the domain layer
+* Perform operations such as data caching.
+
+### Domain layer
+The Domain layer hold all the models(entities) and business logic of our app. The data can be 
+represented by a set of entities along with their relationships, while the behavior is encoded by 
+some business logic for manipulating those entities. These entities and relationships are the end 
+result of a knowledge discovery process.
+
+### Application Layer
+The Application layer that contains a services to hold all the logic of our app. The Application 
+layer acts as a middle-man between the controllers (which only manage the widget state) and the 
+repositories (which talk to different data sources).
+
+### Presentation Layer
+The presentation layer uses controllers to:
+* Hold business logic
+* Manage the widget state
+* Interact with repositories in the data layer
+
 ## Bloc Architecture
 
 ![Bloc Architecture](https://bloclibrary.dev/assets/bloc_architecture_full.png "Bloc Architecture diagram")
@@ -135,11 +171,11 @@ communicates. It interact with multiple data providers and perform transformatio
 handing the result to the business logic Layer.
 
 ### Business Logic Layer
-The business logic layer's responsibility is to respond to input from the presentation layer with new 
-states. This layer can depend on one or more repositories to retrieve data needed to build up the 
-application state. Think of the business logic layer as the bridge between the user interface 
+The business logic layer's responsibility is to respond to input from the presentation layer with new
+states. This layer can depend on one or more repositories to retrieve data needed to build up the
+application state. Think of the business logic layer as the bridge between the user interface
 (presentation layer) and the data layer.
 
 ### Presentation Layer
-The presentation layer's responsibility is render itself based on one or more bloc states. In addition, 
+The presentation layer's responsibility is render itself based on one or more bloc states. In addition,
 it should handle user input and application lifecycle events.
